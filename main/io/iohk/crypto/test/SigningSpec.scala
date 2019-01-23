@@ -10,7 +10,7 @@ import org.scalatest.prop.PropertyChecks._
 import io.iohk.codecs.nio.auto._
 import io.iohk.codecs.nio.test.utils.CodecTestingHelpers
 
-class SigningSpec extends WordSpec with CodecTestingHelpers{
+class SigningSpec extends WordSpec with CodecTestingHelpers {
 
   private val keypair1 = generateSigningKeyPair()
   private val keypair2 = generateSigningKeyPair()
