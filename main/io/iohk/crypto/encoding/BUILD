@@ -3,7 +3,7 @@ load("//scala:rules.bzl", "scala_library", "scala_test")
 scala_library(
     name = "encoding",
     deps = [
-            "@codecs//main/io/iohk/codecs",
+            "@codecs//src/io/iohk/codecs",
              "//main/io/iohk/crypto/error",
              "//3rdparty/jvm/com/chuusai:shapeless",
              "//3rdparty/jvm/com/typesafe/akka:akka_actor",
