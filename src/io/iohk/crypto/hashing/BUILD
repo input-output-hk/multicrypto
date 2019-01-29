@@ -6,13 +6,13 @@ scala_library(
              "//3rdparty/jvm/com/beachape:enumeratum",
              "//3rdparty/jvm/com/beachape:enumeratum_macros",
            ],
-    visibility = ["//main/io/iohk/crypto:__subpackages__"]
+    visibility = ["//src/io/iohk/crypto:__subpackages__"]
 )
 
 scala_test(
     name = "tests",
     deps = [ "hashing",
-            "//main/io/iohk/crypto/test/utils:utils",
+            "//src/io/iohk/crypto/test/utils:utils",
              "//3rdparty/jvm/org/scalacheck:scalacheck",
              "//3rdparty/jvm/com/typesafe/akka:akka_actor",
              "//3rdparty/jvm/com/beachape:enumeratum",

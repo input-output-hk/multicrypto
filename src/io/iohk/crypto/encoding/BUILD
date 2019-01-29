@@ -4,11 +4,11 @@ scala_library(
     name = "encoding",
     deps = [
             "@codecs//src/io/iohk/codecs",
-             "//main/io/iohk/crypto/error",
+             "//src/io/iohk/crypto/error",
              "//3rdparty/jvm/com/chuusai:shapeless",
              "//3rdparty/jvm/com/typesafe/akka:akka_actor",
              "//3rdparty/jvm/com/beachape:enumeratum" ],
-    visibility = ["//main/io/iohk/crypto:__subpackages__"]
+    visibility = ["//src/io/iohk/crypto:__subpackages__"]
 )
 
 scala_test(
