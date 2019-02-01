@@ -7,6 +7,7 @@ scala_library(
             "@codecs//src/io/iohk/codecs",
              #"//src/io/iohk/cef/test",
              "//3rdparty/jvm/com/typesafe/akka:akka_actor",
+             "//3rdparty/jvm/com/typesafe:config_EXT",
              "//3rdparty/jvm/org/scalacheck:scalacheck",
     ],
 )

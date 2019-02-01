@@ -3,9 +3,9 @@ load("//scala:rules.bzl", "scala_library", "scala_test")
 scala_library(
     name = "signing",
     deps = [ "//src/io/iohk/crypto/encoding",
-             "//3rdparty/jvm/com/typesafe/akka:akka_actor",
-             "//3rdparty/jvm/com/beachape:enumeratum",
-             "//3rdparty/jvm/com/beachape:enumeratum_macros",
+             "//3rdparty/jvm/com/typesafe/akka:akka_actor_EXT",
+             "//3rdparty/jvm/com/beachape:enumeratum_EXT",
+             "//3rdparty/jvm/com/beachape:enumeratum_macros_EXT",
            ],
     visibility = ["//src/io/iohk/crypto:__subpackages__"]
 )
