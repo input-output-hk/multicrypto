@@ -7,24 +7,29 @@ scala_library(
              "//src/io/iohk/crypto/encryption",
              "//src/io/iohk/crypto/signing",
              "@codecs//src/io/iohk/codecs",
-             "//src/io/iohk/crypto/error",
-             "//3rdparty/jvm/com/github/pureconfig:pureconfig",
-             "//3rdparty/jvm/com/typesafe/akka:akka_actor",
-             "//3rdparty/jvm/com/beachape:enumeratum" ],
+             "//src/io/iohk/crypto/error" ],
+    external = ["com.typesafe.akka:akka-actor%",
+                "com.beachape:enumeratum%",
+                "com.beachape:enumeratum-macros%",
+                "com.typesafe.akka:akka-slf4j%",
+                "com.github.pureconfig:pureconfig%"],
     visibility = ["//src/io/iohk/crypto:__subpackages__"]
 )
 
-scala_library(
-    name = "crypto",
-    srcs = [],
-    exports = [
+crypto_content = [
       "//src/io/iohk/crypto:crypto_package",
       "//src/io/iohk/crypto/encoding",
       "//src/io/iohk/crypto/hashing",
       "//src/io/iohk/crypto/encryption",
       "//src/io/iohk/crypto/signing",
       "//src/io/iohk/crypto/certificates",
-    ],
+    ]
+
+scala_library(
+    name = "crypto",
+    srcs = [],
+    exports = crypto_content,
+    deps = crypto_content, # This is needed to ensure the fat jar contains anything
 )
 
 scala_test(
@@ -33,9 +38,6 @@ scala_test(
              "@codecs//src/io/iohk/codecs",
              "//src/io/iohk/crypto/error",
              "//src/io/iohk/crypto/test/utils",
-             "@codecs//src/io/iohk/codecs/nio/test/utils",
-             "//3rdparty/jvm/com/github/pureconfig:pureconfig",
-             "//3rdparty/jvm/org/scalacheck:scalacheck",
-             "//3rdparty/jvm/com/typesafe/akka:akka_actor",
-             "//3rdparty/jvm/com/beachape:enumeratum" ]
+             "@codecs//src/io/iohk/codecs/nio/test/utils" ],
+    external = [ "org.scalacheck:scalacheck%" ],
 )
