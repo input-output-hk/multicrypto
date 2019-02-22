@@ -15,6 +15,6 @@ scala_test(
              "//src/io/iohk/crypto:crypto_package",
              "//src/io/iohk/crypto/certificates/test/data:data",
              "@codecs//src/io/iohk/codecs",
-             "//3rdparty/jvm/org/scalacheck:scalacheck",
-           ]
+           ],
+    external = [ "org.scalacheck:scalacheck%" ]
 )
