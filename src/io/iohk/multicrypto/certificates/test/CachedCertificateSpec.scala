@@ -10,6 +10,7 @@ import io.iohk.decco._
 import io.iohk.decco.auto._
 
 import java.security.cert.X509Certificate
+import io.iohk.multicrypto.encoding.implicits._
 
 class CachedCertificateSpec extends WordSpec {
 

@@ -5,8 +5,8 @@ import akka.util.ByteString
 import io.iohk.multicrypto.encryption._
 import io.iohk.multicrypto.encoding.TypedByteString
 import io.iohk.decco.Codec
-//import io.iohk.codecs.utils._
 import io.iohk.multicrypto.encoding._
+import io.iohk.multicrypto.encoding.implicits._
 
 trait Encryption {
 
@@ -44,7 +44,7 @@ trait Encryption {
     */
   def encrypt[T](entity: T, key: EncryptionPublicKey)(implicit codec: Codec[T]): EncryptedData = {
     val encryptedBytes =
-      key.`type`.algorithm.encrypt(codec.encode(entity).toByteString, key.lowlevelKey)
+      key.`type`.algorithm.encrypt(codec.encode(entity), key.lowlevelKey)
 
     EncryptedData(key.`type`, encryptedBytes)
   }
@@ -84,7 +84,7 @@ trait Encryption {
   ): Either[DecryptError, T] = {
     decryptBytes(encryptedData, key)
       .flatMap { bytes =>
-        codec.decode(bytes.toByteBuffer) match {
+        codec.decode(bytes) match {
           case Right(e) => Right(e)
           case Left(_) => Left(DecryptError.EntityCouldNotBeDecoded)
         }

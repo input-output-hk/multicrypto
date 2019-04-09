@@ -36,6 +36,7 @@ scala_test(
     name = "tests",
     deps = [ "multicrypto",
              "@decco//src/io/iohk/decco",
+             "@decco//src/io/iohk/decco/auto",
              "//src/io/iohk/multicrypto/error",
              "//src/io/iohk/multicrypto/test/utils",
              "@decco//src/io/iohk/decco/test/utils",

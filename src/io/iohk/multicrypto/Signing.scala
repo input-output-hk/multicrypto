@@ -4,6 +4,7 @@ import io.iohk.decco._
 import io.iohk.multicrypto.encoding.TypedByteString
 import io.iohk.multicrypto.signing.{SigningAlgorithmsCollection, _}
 import io.iohk.multicrypto.encoding._
+import io.iohk.multicrypto.encoding.implicits._
 
 trait Signing {
 
@@ -37,7 +38,7 @@ trait Signing {
     * @return          a signature of `t`
     */
   def sign[T](t: T, key: SigningPrivateKey)(implicit codec: Codec[T]): Signature = {
-    val signature = key.`type`.algorithm.sign(codec.encode(t).toByteString, key.lowlevelKey)
+    val signature = key.`type`.algorithm.sign(codec.encode(t), key.lowlevelKey)
     Signature(key.`type`, signature)
   }
 
@@ -60,7 +61,7 @@ trait Signing {
     if (key.`type` != signature.`type`)
       false
     else
-      key.`type`.algorithm.isSignatureValid(signature.bytes, encoder.encode(t).toByteString, key.lowlevelKey)
+      key.`type`.algorithm.isSignatureValid(signature.bytes, encoder.encode(t), key.lowlevelKey)
 
   def toSigningPublicKey(obj: AnyRef): Option[SigningPublicKey] = {
     for {

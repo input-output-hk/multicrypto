@@ -74,7 +74,7 @@ class EncryptionSpec extends WordSpec {
     }
 
     "fail to decode data with unsupported algorithms" in {
-      val algorithm = ByteString("RSA".getBytes("UTF-16")).drop(3)
+      val algorithm = ByteString("RSA".getBytes("UTF-8"))
       forAll { input: ByteString =>
         val encrypted = encrypt(input, keys.public)
 
@@ -97,7 +97,6 @@ class EncryptionSpec extends WordSpec {
     }
 
     "fail to decode invalid public key" in {
-
       forAll { bytes: ByteString =>
         type T = KeyDecodeError[EncryptionPublicKey]
         val result = EncryptionPublicKey.decodeFrom(bytes)
@@ -107,7 +106,7 @@ class EncryptionSpec extends WordSpec {
     }
 
     "fail to decode public keys with unsupported algorithms" in {
-      val algorithm = ByteString("RSA".getBytes("UTF-16")).drop(3)
+      val algorithm = ByteString("RSA".getBytes("UTF-8"))
       val key = keys.public
       val index = key.toByteString.indexOfSlice(algorithm)
       val corruptedBytes = key.toByteString.updated(index, 'X'.toByte)
@@ -133,7 +132,7 @@ class EncryptionSpec extends WordSpec {
       }
     }
     "fail to decode private keys with unsupported algorithms" in {
-      val algorithm = ByteString("RSA".getBytes("UTF-16")).drop(3)
+      val algorithm = ByteString("RSA".getBytes("UTF-8"))
 
       val key = keys.`private`
 

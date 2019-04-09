@@ -3,14 +3,14 @@ package io.iohk.multicrypto.encoding
 import akka.util.ByteString
 import io.iohk.multicrypto.encoding.utils._
 import io.iohk.decco._
-import io.iohk.decco.auto._
+import implicits.ByteStringInstantiator
 
 case class TypedByteString(`type`: String, bytes: ByteString) {
 
   import TypedByteString._
 
   def toByteString: ByteString = {
-    Codec[TypedByteString].encode(this).toByteString
+    Codec[TypedByteString].encode(this)
   }
 
   /**
@@ -49,12 +49,12 @@ case class TypedByteString(`type`: String, bytes: ByteString) {
 
 object TypedByteString {
 
-  implicit val TypedByteStringPartialCodec: PartialCodec[TypedByteString] = TypedByteStringHelpers.TypedByteStringCodec
+  implicit val TypedByteStringCodec: Codec[TypedByteString] = TypedByteStringHelpers.TypedByteStringCodec
 
   private implicit val byteOrder: java.nio.ByteOrder = java.nio.ByteOrder.BIG_ENDIAN
 
   def decodeFrom(bytes: ByteString): Either[TypedByteStringDecodingError, TypedByteString] = {
-    Codec[TypedByteString].decode(bytes.toByteBuffer) match {
+    Codec[TypedByteString].decode(bytes) match {
       case Right(tbs) => Right(tbs)
       case Left(source) => Left(TypedByteStringDecodingError.DeccoFailedToDecodeTBS(source))
     }
@@ -145,7 +145,7 @@ object TypedByteString {
 
 sealed trait TypedByteStringDecodingError
 object TypedByteStringDecodingError {
-  case class DeccoFailedToDecodeTBS(source: DecodeFailure) extends TypedByteStringDecodingError
+  case class DeccoFailedToDecodeTBS(source: Codec.Failure) extends TypedByteStringDecodingError
 }
 
 sealed trait TypedByteStringParsingError
@@ -156,8 +156,8 @@ object TypedByteStringParsingError {
 }
 
 private[encoding] object TypedByteStringHelpers {
-  val TypedByteStringCodec: PartialCodec[TypedByteString] = {
+  val TypedByteStringCodec: Codec[TypedByteString] = {
     import io.iohk.decco.auto._
-    PartialCodec[TypedByteString]
+    Codec[TypedByteString]
   }
 }

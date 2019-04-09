@@ -34,5 +34,5 @@ git_repository(
 git_repository(
     name = "decco",
     remote = "https://github.com/input-output-hk/decco.git",
-    commit = "95626426fc439c6c47cfb9fa7daf5a279c07c85b"
+    commit = "6ed968d4b3599f104b417fa26f9cf4505e89e35e"
 )

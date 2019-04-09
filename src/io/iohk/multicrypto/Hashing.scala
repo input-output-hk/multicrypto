@@ -5,6 +5,7 @@ import io.iohk.multicrypto.hashing.HashBytes
 import io.iohk.multicrypto.encoding.TypedByteString
 import io.iohk.decco.Codec
 import io.iohk.multicrypto.encoding._
+import io.iohk.multicrypto.encoding.implicits._
 
 trait Hashing {
 
@@ -23,7 +24,7 @@ trait Hashing {
     * @return          a hash of `entity`
     */
   def hash[T](entity: T)(implicit codec: Codec[T]): Hash =
-    new Hash(hashingType, hashingType.algorithm.hash(codec.encode(entity).toByteString))
+    new Hash(hashingType, hashingType.algorithm.hash(codec.encode(entity)))
 
   /**
     * Returns `true` if `hash` is a hash of `entity`, when using the hashing algorithm
@@ -39,7 +40,7 @@ trait Hashing {
     * @return            `true` if `hash` is a valid hash of `entity`
     */
   def isValidHash[T](entity: T, hash: Hash)(implicit codec: Codec[T]): Boolean =
-    hash.`type`.algorithm.hash(codec.encode(entity).toByteString) == hash.bytes
+    hash.`type`.algorithm.hash(codec.encode(entity)) == hash.bytes
 
   /** Data entity containing a hash and the identifier of the hashing algorithm used to generate it */
   class Hash(private[Hashing] val `type`: hashingCollection.HashingAlgorithmType, private[Hashing] val bytes: HashBytes)

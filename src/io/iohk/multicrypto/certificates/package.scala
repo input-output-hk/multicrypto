@@ -36,8 +36,8 @@ package object certificates {
 
   private val factory = CertificateFactory.getInstance("X.509")
 
-  implicit val x509Codec: PartialCodec[X509Certificate] =
-    PartialCodec[Array[Byte]]
+  implicit val x509Codec: Codec[X509Certificate] =
+    Codec[Array[Byte]]
       .mapOpt(
         ba =>
           Try {

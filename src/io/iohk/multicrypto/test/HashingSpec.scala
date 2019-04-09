@@ -71,7 +71,7 @@ class HashingSpec extends WordSpec {
     }
 
     "fail to decode hashedValues with unsupported algorithms" in {
-      val algorithm = ByteString("SHA256".getBytes("UTF-16")).drop(3) // TODO: there is some problem in the String encoding in decco that makes
+      val algorithm = ByteString("SHA256".getBytes("UTF-8"))
       // this a bit weird, and needs to be fixed
       forAll { bytes: Array[Byte] =>
         val hashedValue = hash(ByteString(bytes))

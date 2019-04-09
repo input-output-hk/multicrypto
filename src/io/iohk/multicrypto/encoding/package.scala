@@ -7,8 +7,8 @@ import java.nio.ByteBuffer
 
 package object encoding {
 
-  implicit val ByteStringCodec: PartialCodec[ByteString] =
-    PartialCodec[Array[Byte]].map(ByteString.apply, _.toArray)
+  implicit val ByteStringCodec: Codec[ByteString] =
+    Codec[Array[Byte]].map(ByteString.apply, _.toArray)
 
   implicit class ByteBufferConversionOps(val byteBuffer: ByteBuffer) {
     def toArray: Array[Byte] = {
@@ -29,4 +29,10 @@ package object encoding {
     def toByteString: ByteString = ByteString(array)
   }
 
+  object implicits {
+
+    implicit val ByteStringInstantiator: BufferInstantiator[ByteString] =
+      BufferInstantiator.global.HeapByteBuffer.map(_.toByteString, _.toByteBuffer)
+
+  }
 }

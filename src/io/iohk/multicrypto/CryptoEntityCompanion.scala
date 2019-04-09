@@ -62,8 +62,8 @@ private[multicrypto] abstract class EntityCompanion[T, DE[_], PE[_]](
 
   def parseFrom(text: String): Either[PE[T], T]
 
-  implicit val multicryptoEntityPartialCodec: PartialCodec[T] =
-    PartialCodec[TypedByteString].mapOpt(tbs => decodeFrom(tbs).toOption, encodeInto)
+  implicit val multicryptoEntityCodec: Codec[T] =
+    Codec[TypedByteString].mapOpt(tbs => decodeFrom(tbs).toOption, encodeInto)
 
   implicit def multicryptoEntityConfigReader(implicit tt: TypeTag[T]): ConfigReader[T] = ConfigReader.fromCursor[T] {
     cur =>
