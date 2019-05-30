@@ -38,12 +38,6 @@ maven_dependencies()
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 git_repository(
-    name = "codecs",
-    commit = "3232f341ae0695d576ecc20746dffccbb7f120b1",
-    remote = "https://github.com/input-output-hk/decco.git",
-)
-
-git_repository(
     name = "decco",
     commit = "e89981d41dbfc1108596c4e9c871c58c1f58dfab",
     remote = "https://github.com/input-output-hk/decco.git",
