@@ -75,6 +75,8 @@ object deps {
     Agg(ivy"io.iohk::decco:1.0-SNAPSHOT")
   val deccoAuto = 
     Agg(ivy"io.iohk::decco-auto:1.0-SNAPSHOT")
+  val deccoTestUtils =
+    Agg(ivy"io.iohk::decco-test-utils:1.0-SNAPSHOT")
 }
 
 trait IOHKModule extends CompositeModule with PublishModule {
@@ -94,7 +96,7 @@ trait IOHKModule extends CompositeModule with PublishModule {
 
   trait IOHKTest extends Tests {
     override def testingLibrary =
-      deps.scalatest
+      deps.scalatest ++ deps.deccoTestUtils
   }
 }
 
@@ -115,8 +117,14 @@ object src extends Module {
 
         object test extends IOHKTest {
           override def moduleDepsExtra = Seq(utils)
-          override def ivyDepsExtra = deps.scalacheck ++ deps.scalactic
+          override def ivyDepsExtra =
+            deps.scalacheck ++
+            deps.scalactic ++
+            deps.deccoTestUtils
           object utils extends IOHKModule {
+
+            override def artifactName = "multicrypto-test-utils"
+
             override def ivyDeps =
               deps.scalacheck ++
                 deps.scalatest ++
@@ -124,6 +132,7 @@ object src extends Module {
 
             override def moduleDeps = Seq(multicrypto)
           }
+
         }
       }
     }
