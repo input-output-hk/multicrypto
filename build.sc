@@ -57,7 +57,7 @@ object deps {
     Agg(ivy"com.typesafe.akka::akka-actor:2.5.19")
   val akkaTestkit =
     Agg(ivy"com.typesafe.akka::akka-testkit:2.5.19")
-    val akkaSl4j =
+  val akkaSl4j =
     Agg(ivy"com.typesafe.akka::akka-slf4j:2.5.19")
   val scalacheck =
     Agg(ivy"org.scalacheck::scalacheck:1.14.0")
@@ -65,15 +65,15 @@ object deps {
     Agg(ivy"org.scalactic::scalactic:3.0.8")
   val scalatest =
     Agg(ivy"org.scalatest::scalatest:3.0.8")
-  val enumeratum = 
+  val enumeratum =
     Agg(ivy"com.beachape::enumeratum:1.5.13")
-  val enumeratumMacros = 
+  val enumeratumMacros =
     Agg(ivy"com.beachape::enumeratum-macros:1.5.9")
-  val pureconfig = 
+  val pureconfig =
     Agg(ivy"com.github.pureconfig::pureconfig:0.10.1")
-  val decco = 
+  val decco =
     Agg(ivy"io.iohk::decco:1.0-SNAPSHOT")
-  val deccoAuto = 
+  val deccoAuto =
     Agg(ivy"io.iohk::decco-auto:1.0-SNAPSHOT")
   val deccoTestUtils =
     Agg(ivy"io.iohk::decco-test-utils:1.0-SNAPSHOT")
@@ -108,19 +108,19 @@ object src extends Module {
         override def artifactName = "multicrypto"
         override def ivyDeps =
           deps.shapeless ++
-          deps.akkaActor ++
-          deps.enumeratum ++
-          deps.enumeratumMacros ++
-          deps.pureconfig ++
-          deps.decco ++
-          deps.deccoAuto
+            deps.akkaActor ++
+            deps.enumeratum ++
+            deps.enumeratumMacros ++
+            deps.pureconfig ++
+            deps.decco ++
+            deps.deccoAuto
 
         object test extends IOHKTest {
           override def moduleDepsExtra = Seq(utils)
           override def ivyDepsExtra =
             deps.scalacheck ++
-            deps.scalactic ++
-            deps.deccoTestUtils
+              deps.scalactic ++
+              deps.deccoTestUtils
           object utils extends IOHKModule {
 
             override def artifactName = "multicrypto-test-utils"
