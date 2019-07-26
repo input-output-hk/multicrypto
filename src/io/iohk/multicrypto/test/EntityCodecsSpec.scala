@@ -2,9 +2,9 @@ package io.iohk.multicrypto
 
 import io.iohk.decco.auto._
 import org.scalatest.FlatSpec
-import io.iohk.decco.test.utils.CodecTestingHelpers
 import io.iohk.multicrypto.encoding.TypedByteString
 import io.iohk.multicrypto.test.utils.CryptoEntityArbitraries
+import io.iohk.decco.test.utils.CodecTestingHelpers
 
 class EntityCodecsSpec extends FlatSpec with CodecTestingHelpers with CryptoEntityArbitraries {
 
